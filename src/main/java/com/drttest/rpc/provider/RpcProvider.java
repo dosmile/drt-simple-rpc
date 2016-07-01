@@ -9,6 +9,7 @@ import com.drttest.rpc.service.impl.HelloServiceImpl;
  */
 public class RpcProvider {
 
+    //对外发布服务
     public static void main(String[] args) throws Exception {
         HelloService service = new HelloServiceImpl();
         RpcFramework.export(service, 1234);
