@@ -1,4 +1,4 @@
-package com.drttest.rpc.framework;
+package com.drttest.rpc.provider.framework;
 
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -23,7 +23,6 @@ public class RpcFramework {
     public static void export(final Object service, int port) throws Exception {
         if (service == null)
             throw new IllegalArgumentException("service instance == null");
-
         if (port <= 0 || port > 65535)
             throw new IllegalArgumentException("Invalid port " + port);
 
@@ -92,7 +91,10 @@ public class RpcFramework {
             throw new IllegalArgumentException("Host == null!");
         if (port <= 0 || port > 65535)
             throw new IllegalArgumentException("Invalid port " + port);
+
         System.out.println("Get remote service " + interfaceClass.getName() + " from server " + host + ":" + port);
+
+        //使用动态代理生成代理对象
         return (T) Proxy.newProxyInstance(interfaceClass.getClassLoader(), new Class<?>[]{interfaceClass}, new InvocationHandler() {
             public Object invoke(Object proxy, Method method, Object[] arguments) throws Throwable {
                 Socket socket = new Socket(host, port);
