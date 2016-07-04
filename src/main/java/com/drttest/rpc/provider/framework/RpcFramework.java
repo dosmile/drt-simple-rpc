@@ -95,8 +95,10 @@ public class RpcFramework {
 
         System.out.println("Get remote service " + interfaceClass.getSimpleName() + " from server " + host + ":" + port);
 
-        //使用动态代理生成代理对象
+        //使用动态代理生成代理对象，返回ProxyInstance
         return (T) Proxy.newProxyInstance(interfaceClass.getClassLoader(), new Class<?>[]{interfaceClass}, new InvocationHandler() {
+
+            //动态代理的执行方法，也即每次经RPC执行service.execute()方法时，实际调的都是invoke()方法
             public Object invoke(Object proxy, Method method, Object[] arguments) throws Throwable {
                 Socket socket = new Socket(host, port);
                 try {
