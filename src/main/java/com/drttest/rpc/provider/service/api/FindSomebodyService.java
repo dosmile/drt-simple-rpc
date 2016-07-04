@@ -9,4 +9,5 @@ public interface FindSomebodyService {
 
     Person loadPersonInfo(int id);
 
+    int savePersonInfo(Person person);
 }

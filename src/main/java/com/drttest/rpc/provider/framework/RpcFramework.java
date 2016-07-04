@@ -54,6 +54,7 @@ public class RpcFramework {
                                         output.writeObject(t);
                                     } finally {
                                         output.close();
+                                        System.out.println("Execute a RPC call (" + methodName + ")");
                                     }
                                 } finally {
                                     input.close();

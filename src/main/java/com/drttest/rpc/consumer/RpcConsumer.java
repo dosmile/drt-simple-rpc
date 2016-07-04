@@ -16,11 +16,18 @@ public class RpcConsumer {
         //代理对象类似于一个空壳，调代理对象的loadPersonInfo方法时，实际是调用代理对象内部的invoke经socket通信获取方法的执行结果
         FindSomebodyService service = RpcFramework.refer(FindSomebodyService.class, "127.0.0.1", 1234);
 
+//        for (int i = 0; i < 10; i ++) {
+//            Person person = service.loadPersonInfo(i);
+//            System.out.println("hello , " + person.getName() + " " + i);
+//            Thread.sleep(1000);
+//        }
+
         for (int i = 0; i < 10; i ++) {
-            Person person = service.loadPersonInfo(i);
-            System.out.println("hello , " + person.getName() + " " + i);
+            int saveResult = service.savePersonInfo(new Person());
+            System.out.println("hello , " + saveResult);
             Thread.sleep(1000);
         }
+
     }
 
 }

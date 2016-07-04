@@ -19,4 +19,13 @@ public class FindSomebodyServiceImpl implements FindSomebodyService {
 
         return person;
     }
+
+    @Override
+    public int savePersonInfo(Person person) {
+        if (person == null) {
+            return 0;
+        }
+
+        return  (int) (Math.random() * 100);
+    }
 }
