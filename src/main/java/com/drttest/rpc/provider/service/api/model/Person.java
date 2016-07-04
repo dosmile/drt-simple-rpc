@@ -1,13 +1,13 @@
 package com.drttest.rpc.provider.service.api.model;
 
+import java.io.Serializable;
+
 /**
  * Created by duruitao on 16/7/1.
+ *
+ * 注意：person 必须实现 Serializable 接口
  */
-public class Person {
-
-    public Person(String name) {
-        this.name = name;
-    }
+public class Person implements Serializable{
 
     private String name;
 

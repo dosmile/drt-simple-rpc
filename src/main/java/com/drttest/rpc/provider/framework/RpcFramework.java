@@ -14,7 +14,7 @@ import java.net.Socket;
 public class RpcFramework {
 
     /**
-     * 暴露服务
+     * 发布服务
      *
      * @param service 服务实现
      * @param port    服务端口
@@ -26,11 +26,12 @@ public class RpcFramework {
         if (port <= 0 || port > 65535)
             throw new IllegalArgumentException("Invalid port " + port);
 
-        System.out.println("Export service " + service.getClass().getName() + " on port " + port);
+        System.out.println("Export service " + service.getClass().getSimpleName() + " on port " + port);
 
-        //建立 socket 监听
+        //建立 socket 监听 server
         ServerSocket server = new ServerSocket(port);
 
+        //由于此无限循环，export方法不会return，且参数service被声明为final，不允许该引用再指向其他对象
         for (; ; ) {
             try {
                 final Socket socket = server.accept();
@@ -92,7 +93,7 @@ public class RpcFramework {
         if (port <= 0 || port > 65535)
             throw new IllegalArgumentException("Invalid port " + port);
 
-        System.out.println("Get remote service " + interfaceClass.getName() + " from server " + host + ":" + port);
+        System.out.println("Get remote service " + interfaceClass.getSimpleName() + " from server " + host + ":" + port);
 
         //使用动态代理生成代理对象
         return (T) Proxy.newProxyInstance(interfaceClass.getClassLoader(), new Class<?>[]{interfaceClass}, new InvocationHandler() {
